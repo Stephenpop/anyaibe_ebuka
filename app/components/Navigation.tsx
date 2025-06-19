@@ -22,7 +22,6 @@ export default function Navigation() {
     { href: "#experience", label: "Experience" },
     { href: "#projects", label: "Projects" },
     { href: "#contact", label: "Contact" },
-    { href: "/resume.pdf", label: "Resume", target: "_blank", className: "glow-effect bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:scale-105 transition-all duration-300" },
   ]
 
   return (
@@ -36,17 +35,24 @@ export default function Navigation() {
           <div className="text-2xl font-bold gradient-text">Anyaibe Ebuka</div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className={`text-gray-300 hover:text-white transition-colors duration-300 hover:scale-105 ${item.className || ""}`}
-                {...(item.target && { target: item.target, rel: "noopener noreferrer" })}
+                className="text-gray-300 hover:text-white transition-colors duration-300 hover:scale-105"
               >
                 {item.label}
               </a>
             ))}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-md font-medium hover:scale-105 transition-all duration-300"
+            >
+              Resume
+            </a>
           </div>
 
           {/* Mobile Navigation Button */}
@@ -58,11 +64,15 @@ export default function Navigation() {
         {/* Mobile Navigation Menu */}
         {isOpen && (
           <div className="md:hidden bg-gray-800 rounded-lg mt-2 p-4">
-            {navItems.map((item) => (
+            {[...navItems, { href: "/resume.pdf", label: "Resume", target: "_blank" }].map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className={`block py-2 text-gray-300 hover:text-white transition-colors ${item.className || "px-4"}`}
+                className={`block py-2 text-gray-300 hover:text-white transition-colors px-4 ${
+                  item.label === "Resume"
+                    ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md mt-2"
+                    : ""
+                }`}
                 onClick={() => setIsOpen(false)}
                 {...(item.target && { target: item.target, rel: "noopener noreferrer" })}
               >
