@@ -1,51 +1,8 @@
 "use server"
 
-import { writeFile, readFile, mkdir } from "fs/promises"
-import { existsSync } from "fs"
-import path from "path"
+import { Resend } from "resend"
 
-interface ContactSubmission {
-  id: string
-  name: string
-  email: string
-  subject: string
-  message: string
-  timestamp: string
-}
-
-const SUBMISSIONS_FILE = path.join(process.cwd(), "data", "submissions.json")
-
-async function ensureDataDirectory() {
-  const dataDir = path.join(process.cwd(), "data")
-  if (!existsSync(dataDir)) {
-    await mkdir(dataDir, { recursive: true })
-  }
-}
-
-async function getSubmissions(): Promise<ContactSubmission[]> {
-  try {
-    await ensureDataDirectory()
-    if (!existsSync(SUBMISSIONS_FILE)) {
-      return []
-    }
-    const data = await readFile(SUBMISSIONS_FILE, "utf-8")
-    return JSON.parse(data)
-  } catch (error) {
-    console.error("Error reading submissions:", error)
-    return []
-  }
-}
-
-async function saveSubmission(submission: ContactSubmission) {
-  try {
-    await ensureDataDirectory()
-    const submissions = await getSubmissions()
-    submissions.push(submission)
-    await writeFile(SUBMISSIONS_FILE, JSON.stringify(submissions, null, 2))
-  } catch (error) {
-    console.error("Error saving submission:", error)
-  }
-}
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function submitContactForm(formData: FormData) {
   const name = formData.get("name") as string
@@ -71,20 +28,38 @@ export async function submitContactForm(formData: FormData) {
   }
 
   try {
-    // Create submission object
-    const submission: ContactSubmission = {
-      id: Date.now().toString(),
-      name,
-      email,
-      subject,
-      message,
-      timestamp: new Date().toISOString(),
-    }
+    // Send email notification to you
+    await resend.emails.send({
+      from: "contact@resend.dev", // Resend's default sending domain
+      to: "anyaibeebuka@gmail.com",
+      subject: `New Contact: ${subject}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #333; border-bottom: 2px solid #3b82f6; padding-bottom: 10px;">
+            New Contact Form Submission
+          </h2>
+          
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p><strong style="color: #3b82f6;">Name:</strong> ${name}</p>
+            <p><strong style="color: #3b82f6;">Email:</strong> ${email}</p>
+            <p><strong style="color: #3b82f6;">Subject:</strong> ${subject}</p>
+          </div>
+          
+          <div style="background: #fff; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
+            <h3 style="color: #333; margin-top: 0;">Message:</h3>
+            <p style="line-height: 1.6; color: #555;">${message.replace(/\n/g, "<br>")}</p>
+          </div>
+          
+          <div style="margin-top: 20px; padding: 15px; background: #eff6ff; border-radius: 8px;">
+            <p style="margin: 0; color: #1e40af; font-size: 14px;">
+              <strong>Reply to:</strong> ${email}
+            </p>
+          </div>
+        </div>
+      `,
+    })
 
-    // Save to file
-    await saveSubmission(submission)
-
-    // Log to console (you'll see this in your terminal when running the app)
+    // Log the submission for backup
     console.log("📧 New Contact Form Submission:")
     console.log("Name:", name)
     console.log("Email:", email)
@@ -104,8 +79,4 @@ export async function submitContactForm(formData: FormData) {
       message: "Sorry, there was an error sending your message. Please try again.",
     }
   }
-}
-
-export async function getContactSubmissions() {
-  return await getSubmissions()
 }
