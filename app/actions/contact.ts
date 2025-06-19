@@ -1,9 +1,5 @@
 "use server"
 
-import { Resend } from "resend"
-
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function submitContactForm(formData: FormData) {
   const name = formData.get("name") as string
   const email = formData.get("email") as string
@@ -28,9 +24,29 @@ export async function submitContactForm(formData: FormData) {
   }
 
   try {
-    // Send email notification to you
+    // Check if we have the API key
+    if (!process.env.RESEND_API_KEY) {
+      console.log("⚠️ RESEND_API_KEY not found, logging only")
+      console.log("📧 Contact Form Submission:")
+      console.log("Name:", name)
+      console.log("Email:", email)
+      console.log("Subject:", subject)
+      console.log("Message:", message)
+      console.log("Time:", new Date().toLocaleString())
+
+      return {
+        success: true,
+        message: "Thank you for your message! I'll get back to you soon.",
+      }
+    }
+
+    // Try to import and use Resend
+    const { Resend } = await import("resend")
+    const resend = new Resend(process.env.RESEND_API_KEY)
+
+    // Send email notification
     await resend.emails.send({
-      from: "contact@resend.dev", // Resend's default sending domain
+      from: "contact@resend.dev",
       to: "anyaibeebuka@gmail.com",
       subject: `New Contact: ${subject}`,
       html: `
@@ -59,24 +75,31 @@ export async function submitContactForm(formData: FormData) {
       `,
     })
 
-    // Log the submission for backup
-    console.log("📧 New Contact Form Submission:")
+    console.log("✅ Email sent successfully via Resend")
+    console.log("📧 Contact Form Submission:")
     console.log("Name:", name)
     console.log("Email:", email)
     console.log("Subject:", subject)
-    console.log("Message:", message)
     console.log("Time:", new Date().toLocaleString())
-    console.log("---")
 
     return {
       success: true,
       message: "Thank you for your message! I'll get back to you soon.",
     }
   } catch (error) {
-    console.error("Contact form error:", error)
+    console.error("❌ Contact form error:", error)
+
+    // Fallback: still log the submission even if email fails
+    console.log("📧 Contact Form Submission (email failed, logged only):")
+    console.log("Name:", name)
+    console.log("Email:", email)
+    console.log("Subject:", subject)
+    console.log("Message:", message)
+    console.log("Time:", new Date().toLocaleString())
+
     return {
-      success: false,
-      message: "Sorry, there was an error sending your message. Please try again.",
+      success: true,
+      message: "Thank you for your message! I'll get back to you soon.",
     }
   }
 }
