@@ -33,8 +33,8 @@ export default function Hero() {
           </div>
 
           <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Passionate about creating innovative web solutions and sharing knowledge through blogging. Mechanical
-            Engineering graduate turned full-stack developer with expertise in modern web technologies.
+           Passionate about creating innovative web solutions and sharing knowledge through blogging. Mechanical Engineering student transitioning 
+            into full-stack development with growing expertise in modern web technologies.
           </p>
 
           <div className="flex flex-wrap justify-center gap-6 mb-12">
