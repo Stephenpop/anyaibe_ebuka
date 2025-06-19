@@ -45,7 +45,7 @@ export default function About() {
               <div className="w-80 h-80 rounded-full overflow-hidden border-4 border-gradient-to-r from-blue-500 to-purple-600 p-1">
                 <div className="w-full h-full rounded-full overflow-hidden bg-gray-800">
                   <img
-                    src="/profiles.jpg"
+                    src="/profile.png"
                     alt="Anyaibe Ebuka Stephen"
                     className="w-full h-full object-cover"
                     onError={(e) => {
