@@ -22,6 +22,7 @@ export default function Navigation() {
     { href: "#experience", label: "Experience" },
     { href: "#projects", label: "Projects" },
     { href: "#contact", label: "Contact" },
+    { href: "/resume.pdf", label: "Resume", target: "_blank", className: "glow-effect bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:scale-105 transition-all duration-300" },
   ]
 
   return (
@@ -40,7 +41,8 @@ export default function Navigation() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-gray-300 hover:text-white transition-colors duration-300 hover:scale-105"
+                className={`text-gray-300 hover:text-white transition-colors duration-300 hover:scale-105 ${item.className || ""}`}
+                {...(item.target && { target: item.target, rel: "noopener noreferrer" })}
               >
                 {item.label}
               </a>
@@ -60,8 +62,9 @@ export default function Navigation() {
               <a
                 key={item.href}
                 href={item.href}
-                className="block py-2 text-gray-300 hover:text-white transition-colors"
+                className={`block py-2 text-gray-300 hover:text-white transition-colors ${item.className || "px-4"}`}
                 onClick={() => setIsOpen(false)}
+                {...(item.target && { target: item.target, rel: "noopener noreferrer" })}
               >
                 {item.label}
               </a>
