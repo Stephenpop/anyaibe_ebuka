@@ -32,7 +32,25 @@ export default function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <div className="text-2xl font-bold gradient-text">Anyaibe Ebuka</div>
+          {/* Logo and Name */}
+          <div className="flex items-center space-x-2">
+            <img
+              src="/favicon-16x16.png"
+              alt="Anyaibe Ebuka Logo"
+              className="w-6 h-6 sm:w-8 sm:h-8"
+              onError={(e) => {
+                // Fallback to a simple colored circle if logo doesn't exist
+                e.currentTarget.style.display = "none"
+                e.currentTarget.nextElementSibling.style.display = "block"
+              }}
+            />
+            {/* Fallback logo */}
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full hidden"
+              style={{ display: "none" }}
+            ></div>
+            <div className="text-xl sm:text-2xl font-bold gradient-text">Anyaibe Ebuka</div>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
