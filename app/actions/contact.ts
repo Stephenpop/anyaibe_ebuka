@@ -1,52 +1,45 @@
 "use server"
 
 export async function submitContactForm(formData: FormData) {
-  const name = formData.get("name") as string
-  const email = formData.get("email") as string
-  const subject = formData.get("subject") as string
-  const message = formData.get("message") as string
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const subject = formData.get("subject") as string;
+  const message = formData.get("message") as string;
 
   // Basic validation
   if (!name || !email || !subject || !message) {
     return {
       success: false,
       message: "All fields are required.",
-    }
+    };
   }
 
   // Email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return {
       success: false,
       message: "Please enter a valid email address.",
-    }
+    };
   }
 
   try {
     // Check if we have the API key
     if (!process.env.RESEND_API_KEY) {
-      console.log("⚠️ RESEND_API_KEY not found, logging only")
-      console.log("📧 Contact Form Submission:")
-      console.log("Name:", name)
-      console.log("Email:", email)
-      console.log("Subject:", subject)
-      console.log("Message:", message)
-      console.log("Time:", new Date().toLocaleString())
-
+      console.error("RESEND_API_KEY missing");
       return {
-        success: true,
-        message: "Thank you for your message! I'll get back to you soon.",
-      }
+        success: false,
+        message: "Server configuration error.",
+      };
     }
 
     // Try to import and use Resend
-    const { Resend } = await import("resend")
-    const resend = new Resend(process.env.RESEND_API_KEY)
+    const { Resend } = await import("resend");
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Send email notification
     await resend.emails.send({
-      from: "contact@resend.dev",
+      from: "anyaibeebuka@gmail.com", // Updated to verified email
       to: "anyaibeebuka@gmail.com",
       subject: `New Contact: ${subject}`,
       html: `
@@ -73,33 +66,25 @@ export async function submitContactForm(formData: FormData) {
           </div>
         </div>
       `,
-    })
+    });
 
-    console.log("✅ Email sent successfully via Resend")
-    console.log("📧 Contact Form Submission:")
-    console.log("Name:", name)
-    console.log("Email:", email)
-    console.log("Subject:", subject)
-    console.log("Time:", new Date().toLocaleString())
+    console.log("✅ Email sent successfully via Resend");
+    console.log("📧 Contact Form Submission:");
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Subject:", subject);
+    console.log("Message:", message);
+    console.log("Time:", new Date().toLocaleString());
 
     return {
       success: true,
       message: "Thank you for your message! I'll get back to you soon.",
-    }
+    };
   } catch (error) {
-    console.error("❌ Contact form error:", error)
-
-    // Fallback: still log the submission even if email fails
-    console.log("📧 Contact Form Submission (email failed, logged only):")
-    console.log("Name:", name)
-    console.log("Email:", email)
-    console.log("Subject:", subject)
-    console.log("Message:", message)
-    console.log("Time:", new Date().toLocaleString())
-
+    console.error("❌ Contact form error:", error);
     return {
-      success: true,
-      message: "Thank you for your message! I'll get back to you soon.",
-    }
+      success: false,
+      message: "Failed to send message. Please try again later.",
+    };
   }
 }
