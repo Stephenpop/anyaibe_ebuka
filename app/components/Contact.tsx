@@ -8,6 +8,12 @@
      export default function Contact() {
        const [state, formAction, isPending] = useActionState(submitContactForm, null)
 
+       const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+         const formData = new FormData(event.currentTarget);
+         console.log("FormData before submission:", Object.fromEntries(formData));
+         formAction(formData);
+       };
+
        return (
          <section id="contact" className="py-20 bg-gray-800/50">
            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,7 +103,7 @@
                </div>
 
                <div className="card-hover bg-gray-800 p-8 rounded-lg border border-gray-700">
-                 <form action={formAction} method="POST" className="space-y-6">
+                 <form onSubmit={handleSubmit} method="POST" className="space-y-6">
                    {state && (
                      <div
                        className={`p-4 rounded-lg ${state.success ? "bg-green-500/20 text-green-300" : "bg-red-500/20 text-red-300"}`}
