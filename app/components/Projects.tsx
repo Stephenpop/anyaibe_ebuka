@@ -14,26 +14,24 @@ export default function Projects() {
       githubUrl: "#",
       featured: true,
     },
-    [
-  {
-    "title": "LingslatePal",
-    "description": "Language translation platform with real-time text translation, speech-to-text, and collaborative editing, built with React, TypeScript, Node.js, HTML, and CSS.",
-    "image": "/projects/lingslatepal.png",
-    "technologies": ["React", "TypeScript", "Node.js", "HTML", "CSS"],
-    "liveUrl": "https://lingslatepal.vercel.app/",
-    "githubUrl": "https://github.com/Stephenpop/lingslatepal222",
-    "featured": true
-  },
-  {
-    "title": "WordVale",
-    "description": "Word processing application with rich text editing, cloud storage, and team collaboration features, built with React, TypeScript, Node.js, HTML, and CSS.",
-    "image": "/projects/wordvale.png",
-    "technologies": ["React", "TypeScript", "Node.js", "HTML", "CSS"],
-    "liveUrl": "https://wordvale.vercel.app/",
-    "githubUrl": "#",
-    "featured": true
-  }
-
+    {
+      title: "LingslatePal",
+      description: "Language translation platform with real-time text translation, speech-to-text, and collaborative editing, built with React, TypeScript, Node.js, HTML, and CSS.",
+      image: "/projects/lingslatepal.png",
+      technologies: ["React", "TypeScript", "Node.js", "HTML", "CSS"],
+      liveUrl: "https://lingslatepal.vercel.app/",
+      githubUrl: "https://github.com/Stephenpop/lingslatepal222",
+      featured: true
+    },
+    {
+      title: "WordVale",
+      description: "Word processing application with rich text editing, cloud storage, and team collaboration features, built with React, TypeScript, Node.js, HTML, and CSS.",
+      image: "/projects/wordvale.png",
+      technologies: ["React", "TypeScript", "Node.js", "HTML", "CSS"],
+      liveUrl: "https://wordvale.vercel.app/",
+      githubUrl: "#",
+      featured: true
+    },
     {
       title: "WordPress Custom Theme",
       description:
