@@ -11,9 +11,29 @@ export default function Projects() {
       image: "/projects/errandplus.png",
       technologies: ["PHP", "HTML", "CSS", "JavaScript", "MySQL"],
       liveUrl: "https://www.errandplus.org/",
-      githubUrl: "https://github.com/yourusername/wp-theme",
+      githubUrl: "#",
       featured: true,
     },
+    [
+  {
+    "title": "LingslatePal",
+    "description": "Language translation platform with real-time text translation, speech-to-text, and collaborative editing, built with React, TypeScript, Node.js, HTML, and CSS.",
+    "image": "/projects/lingslatepal.png",
+    "technologies": ["React", "TypeScript", "Node.js", "HTML", "CSS"],
+    "liveUrl": "https://lingslatepal.vercel.app/",
+    "githubUrl": "https://github.com/Stephenpop/lingslatepal222",
+    "featured": true
+  },
+  {
+    "title": "WordVale",
+    "description": "Word processing application with rich text editing, cloud storage, and team collaboration features, built with React, TypeScript, Node.js, HTML, and CSS.",
+    "image": "/projects/wordvale.png",
+    "technologies": ["React", "TypeScript", "Node.js", "HTML", "CSS"],
+    "liveUrl": "https://wordvale.vercel.app/",
+    "githubUrl": "#",
+    "featured": true
+  }
+
     {
       title: "WordPress Custom Theme",
       description:
@@ -31,7 +51,7 @@ export default function Projects() {
       image: "/projects/ouragrosoft.png",
       technologies: ["PHP", "HTML", "CSS", "JavaScript", "MySQL"],
       liveUrl: "https://www.errandplus.org/agrosoft/index.php",
-      githubUrl: "https://github.com/yourusername/wp-theme",
+      githubUrl: "#",
       featured: true,
     },
     {
@@ -40,8 +60,8 @@ export default function Projects() {
         "PHP-based staff management system for schools and churches with task assignment, real-time updates, and collaboration features, built with HTML, CSS, JavaScript, and MySQL.",
       image: "/projects/staff.png",
       technologies: ["PHP", "HTML", "CSS", "JavaScript", "MySQL"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com/yourusername/ecommerce",
+      liveUrl: "#",
+      githubUrl: "#",
       featured: true,
     },
     {
@@ -50,8 +70,8 @@ export default function Projects() {
         "WordPress-based online learning platform offering courses in cybersecurity and other tech subjects, with task assignment, real-time updates, and collaboration features, built with HTML, CSS, JavaScript, and MySQL.",
       image: "/projects/e-learning.png",
       technologies: ["WordPress", "HTML", "CSS", "JavaScript", "MySQL"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com/yourusername/ecommerce",
+      liveUrl: "#",
+      githubUrl: "#",
       featured: true,
     },
     {
@@ -60,8 +80,8 @@ export default function Projects() {
         "Full-stack e-commerce solution built with Next.js, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.",
       image: "/projects/e-commerce.png",
       technologies: ["Next.js", "Node.js", "MongoDB", "Stripe", "Tailwind CSS"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com/yourusername/ecommerce",
+      liveUrl: "#",
+      githubUrl: "#",
       featured: true,
     },
     {
