@@ -1,10 +1,10 @@
 
    "use server"
 
-   export async function submitContactForm(formData: FormData | null) {
-     if (!formData) {
-       console.error("FormData is null or undefined");
-       return { success: false, message: "Invalid form submission." };
+   export async function submitContactForm(formData: FormData | unknown) {
+     if (!(formData instanceof FormData)) {
+       console.error("Invalid formData type:", formData);
+       return { success: false, message: "Invalid form submission: FormData expected." };
      }
 
      const name = formData.get("name") as string;
