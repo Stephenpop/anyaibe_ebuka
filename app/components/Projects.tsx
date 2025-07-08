@@ -38,7 +38,7 @@ export default function Projects() {
         "Responsive WordPress theme for a digital agency with custom post types, ACF integration, and performance optimization.",
       image: "/projects/bero.png",
       technologies: ["WordPress", "PHP", "JavaScript", "SCSS", "ACF"],
-      liveUrl: "#",
+      liveUrl: "bero.com.ng",
       githubUrl: "#",
       featured: true,
     },
@@ -146,7 +146,7 @@ export default function Projects() {
                 <img
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-64 object-contain transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
                   <div className="flex space-x-4">
