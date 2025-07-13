@@ -22,7 +22,16 @@ export default function Projects() {
       liveUrl: "https://lingslatepal.vercel.app/",
       githubUrl: "https://github.com/Stephenpop/lingslatepal222",
       featured: true
-    },
+    }, 
+   {
+  title: "Luminforge Photography Agency",
+  description: "Professional photography agency capturing stunning moments with high-quality services, built with Next.js, Plasmic, and CSS.",
+  image: "/projects/luminforge-photography.jpg",
+  technologies: ["Next.js", "Plasmic", "CSS"],
+  liveUrl: "https://luminforge.vercel.app/",
+  githubUrl: "https://github.com/Stephenpop/luminforge233",
+  featured: true
+},
     {
       title: "WordVale",
       description: "Word processing application with rich text editing, cloud storage, and team collaboration features, built with React, TypeScript, Node.js, HTML, and CSS.",
