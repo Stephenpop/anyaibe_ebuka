@@ -26,7 +26,7 @@ export default function Projects() {
    {
   title: "Luminforge Photography Agency",
   description: "Professional photography agency capturing stunning moments with high-quality services, built with Next.js, Plasmic, and CSS.",
-  image: "/projects/luminforge-photography.jpg",
+  image: "/projects/luminforge.png",
   technologies: ["Next.js", "Plasmic", "CSS"],
   liveUrl: "https://luminforge.vercel.app/",
   githubUrl: "https://github.com/Stephenpop/luminforge233",
